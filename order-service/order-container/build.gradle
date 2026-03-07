@@ -1,0 +1,10 @@
+dependencies {
+    implementation project(':order-service:order-domain:order-domain-core')
+    implementation project(':order-service:order-domain:order-application-service')
+    implementation project(':order-service:order-dataaccess')
+    implementation project(':order-service:order-messaging')
+    implementation project(':order-service:order-application')
+//    testImplementation platform('org.junit:junit-bom:5.10.0')
+//    testImplementation 'org.junit.jupiter:junit-jupiter'
+//    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}

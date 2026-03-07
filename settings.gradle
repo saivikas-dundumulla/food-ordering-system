@@ -1,0 +1,62 @@
+rootProject.name = 'food-ordering-system'
+
+// ========================================
+// Infrastructure Modules
+// ========================================
+// include 'infrastructure:kafka'
+// include 'infrastructure:postgres'
+// include 'infrastructure:docker-compose'
+
+// ========================================
+// Common/Shared Modules
+// ========================================
+// include 'common:common-domain'
+// include 'common:common-application'
+// include 'common:common-dataaccess'
+// include 'common:common-messaging'
+
+// ========================================
+// Order Service (Hexagonal Architecture)
+// ========================================
+include 'order-service'
+include 'order-service:order-domain'
+include 'order-service:order-application'
+include 'order-service:order-dataaccess'
+include 'order-service:order-messaging'
+include 'order-service:order-container'
+include 'order-service:order-domain:order-domain-core'
+include 'order-service:order-domain:order-application-service'
+
+// ========================================
+// Payment Service
+// ========================================
+// include 'payment-service'
+// include 'payment-service:payment-domain'
+// include 'payment-service:payment-application'
+// include 'payment-service:payment-dataaccess'
+// include 'payment-service:payment-messaging'
+// include 'payment-service:payment-container'
+
+// ========================================
+// Customer Service
+// ========================================
+// include 'customer-service'
+// include 'customer-service:customer-domain'
+// include 'customer-service:customer-application'
+// include 'customer-service:customer-dataaccess'
+// include 'customer-service:customer-messaging'
+// include 'customer-service:customer-container'
+
+// ========================================
+// Restaurant Service
+// ========================================
+// include 'restaurant-service'
+// include 'restaurant-service:restaurant-domain'
+// include 'restaurant-service:restaurant-application'
+// include 'restaurant-service:restaurant-dataaccess'
+// include 'restaurant-service:restaurant-messaging'
+// include 'restaurant-service:restaurant-container'
+
+// Uncomment modules as you create them
+
+

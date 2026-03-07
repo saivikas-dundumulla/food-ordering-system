@@ -1,0 +1,7 @@
+// Order Application Service Module - Application Layer Use Cases
+// Contains command handlers, DTOs, ports/interfaces
+
+dependencies {
+    // Inter-module dependency - domain core
+    implementation project(':order-service:order-domain:order-domain-core')
+}
