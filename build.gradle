@@ -1,0 +1,101 @@
+plugins {
+    id 'java'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'maven-publish'
+}
+
+group = 'com.food.ordering.system'
+version = '1.0-SNAPSHOT'
+
+// Gradle equivalent of Maven properties
+ext {
+    javaVersion = '21'
+    springBootVersion = '3.5.11'
+}
+
+// Java configuration for parent (minimal)
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+    }
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+repositories {
+    mavenCentral()
+}
+
+// Configure all child modules
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = rootProject.group
+    version = rootProject.version
+
+    // Java toolchain configuration for all modules
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(rootProject.javaVersion)
+        }
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+
+    repositories {
+        mavenCentral()
+    }
+
+    // Import Spring Boot BOM for dependency management
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${rootProject.springBootVersion}"
+        }
+    }
+
+    // Common dependencies for all child modules
+    dependencies {
+        // Testing dependencies (versions managed by Spring Boot BOM)
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testImplementation 'org.junit.jupiter:junit-jupiter'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    }
+    // Test configuration
+    test {
+        useJUnitPlatform()
+    }
+}
+
+// Maven publishing configuration for parent POM
+publishing {
+    publications {
+        create('mavenJava', MavenPublication) {
+            pom {
+                name = 'Food Ordering System'
+                description = 'Parent POM for Food Ordering System - Multi-module Microservices Architecture'
+                packaging = 'pom'
+
+                properties = [
+                    'java.version': javaVersion.toString(),
+                    'maven.compiler.source': javaVersion.toString(),
+                    'maven.compiler.target': javaVersion.toString(),
+                    'spring-boot.version': springBootVersion.toString(),
+                    'project.build.sourceEncoding': 'UTF-8',
+                    'project.reporting.outputEncoding': 'UTF-8'
+                ]
+            }
+        }
+    }
+    repositories {
+        maven {
+            name = 'local'
+            url = uri(layout.buildDirectory.dir("repo"))
+        }
+    }
+}
+
+
+
+
+
