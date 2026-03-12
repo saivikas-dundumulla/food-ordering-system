@@ -37,7 +37,7 @@ subprojects {
     // Java toolchain configuration for all modules
     java {
         toolchain {
-            languageVersion = JavaLanguageVersion.of(rootProject.javaVersion)
+            languageVersion = JavaLanguageVersion.of(javaVersion)
         }
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
@@ -50,7 +50,7 @@ subprojects {
     // Import Spring Boot BOM for dependency management
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:${rootProject.springBootVersion}"
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
         }
     }
 

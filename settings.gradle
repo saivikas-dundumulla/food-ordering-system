@@ -60,3 +60,5 @@ include 'order-service:order-domain:order-application-service'
 // Uncomment modules as you create them
 
 
+include 'common'
+include 'common:common-domain'
