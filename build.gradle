@@ -56,6 +56,12 @@ subprojects {
 
     // Common dependencies for all child modules
     dependencies {
+        // Lombok
+        compileOnly 'org.projectlombok:lombok'
+        annotationProcessor 'org.projectlombok:lombok'
+        // Spring Boot Starter Logging
+        implementation 'org.springframework.boot:spring-boot-starter-logging'
+
         // Testing dependencies (versions managed by Spring Boot BOM)
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.junit.jupiter:junit-jupiter'
@@ -77,12 +83,12 @@ publishing {
                 packaging = 'pom'
 
                 properties = [
-                    'java.version': javaVersion.toString(),
-                    'maven.compiler.source': javaVersion.toString(),
-                    'maven.compiler.target': javaVersion.toString(),
-                    'spring-boot.version': springBootVersion.toString(),
-                    'project.build.sourceEncoding': 'UTF-8',
-                    'project.reporting.outputEncoding': 'UTF-8'
+                        'java.version'                    : javaVersion.toString(),
+                        'maven.compiler.source'           : javaVersion.toString(),
+                        'maven.compiler.target'           : javaVersion.toString(),
+                        'spring-boot.version'             : springBootVersion.toString(),
+                        'project.build.sourceEncoding'    : 'UTF-8',
+                        'project.reporting.outputEncoding': 'UTF-8'
                 ]
             }
         }

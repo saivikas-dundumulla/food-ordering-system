@@ -4,11 +4,12 @@ import java.util.Objects;
 
 public abstract class BaseId<T> {
     private final T id;
+
     protected BaseId(T id) {
         this.id = id;
     }
 
-    public T getId() {
+    public T getValue() {
         return id;
     }
 
