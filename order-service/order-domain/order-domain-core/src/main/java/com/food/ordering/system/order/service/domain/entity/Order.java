@@ -33,6 +33,10 @@ public class Order extends AggregateRoot<OrderId> {
         failureMessages = builder.failureMessages;
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
     public void pay() {
         if (orderStatus != OrderStatus.PENDING) {
             throw new OrderDomainException("Order is not in correct state for pay operation!");
@@ -167,10 +171,6 @@ public class Order extends AggregateRoot<OrderId> {
         private List<String> failureMessages;
 
         private Builder() {
-        }
-
-        public static Builder builder() {
-            return new Builder();
         }
 
         public Builder id(OrderId val) {
