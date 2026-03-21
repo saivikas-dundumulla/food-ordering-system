@@ -11,6 +11,7 @@ version = '1.0-SNAPSHOT'
 ext {
     javaVersion = '21'
     springBootVersion = '3.5.11'
+    mockitoVersion = '5.23.0'
 }
 
 // Java configuration for parent (minimal)
@@ -63,6 +64,7 @@ subprojects {
         implementation 'org.springframework.boot:spring-boot-starter-logging'
 
         // Testing dependencies (versions managed by Spring Boot BOM)
+        testImplementation "org.mockito:mockito-core:${mockitoVersion}"
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testImplementation 'org.junit.jupiter:junit-jupiter'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

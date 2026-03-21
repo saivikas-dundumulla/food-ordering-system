@@ -64,14 +64,18 @@ public class OrderDomainServiceImpl implements OrderDomainService {
     }
 
     private void setOrderProductInformation(Order order, Restaurant restaurant) {
+        // Restaurant product data may be duplicated by upstream read models; keep the first seen entry.
         Map<ProductId, Product> restaurantProductsMap = restaurant.getProducts().stream()
-                .collect(Collectors.toMap(Product::getId, Function.identity()));
+                .collect(Collectors.toMap(Product::getId, Function.identity(), (existing, duplicate) -> existing));
+
         order.getItems().forEach(orderItem -> {
-            if (restaurantProductsMap.containsKey(orderItem.getProduct().getId())) {
-                Product restaurantProduct = restaurantProductsMap.get(orderItem.getProduct().getId());
-                orderItem.getProduct().updateWithConfirmedNameAndPrice(restaurantProduct.getName(),
-                        restaurantProduct.getPrice());
+            Product restaurantProduct = restaurantProductsMap.get(orderItem.getProduct().getId());
+            if (restaurantProduct == null) {
+                throw new OrderDomainException("Product with id: %s is not available in restaurant with id: %s"
+                        .formatted(orderItem.getProduct().getId().getValue(), order.getRestaurantId().getValue()));
             }
+            orderItem.getProduct().updateWithConfirmedNameAndPrice(restaurantProduct.getName(),
+                    restaurantProduct.getPrice());
         });
     }
 }
